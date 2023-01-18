@@ -1,0 +1,11 @@
+﻿@model DataTable
+@{
+}
+@using System.Data.SqlClient;
+@using System.Data;
+<div>
+    @foreach(DataRow item in Model.Rows){
+        <p>@item["username"]</p>        
+        <p>@item["userpassword"]</p>
+    }
+</div>

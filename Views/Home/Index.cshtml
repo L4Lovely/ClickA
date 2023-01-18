@@ -1,0 +1,15 @@
+﻿@{
+ 
+}
+@model SQLConnector
+<form asp-action="MainView" method="post">
+    <div>
+        <label asp-for="Username">Username: </label>
+        <input asp-for="Username" />
+    </div>
+    <div>
+        <label asp-for="Password">Password: </label>
+        <input type="password" asp-for="Password"/>
+    </div>
+    <button type="submit">!Login!</button>
+</form>
