@@ -1,15 +1,20 @@
 ﻿@{
- 
+
 }
-@model SQLConnector
+@model IndexView
 <form asp-action="MainView" method="post">
     <div>
-        <label asp-for="Username">Username: </label>
-        <input asp-for="Username" />
+        <label asp-for="@Model.Sfp.Username">Username: </label>
+        <input asp-for="@Model.Sfp.Username" />
     </div>
     <div>
-        <label asp-for="Password">Password: </label>
-        <input type="password" asp-for="Password"/>
+        <label asp-for="@Model.Sfp.Password">Password: </label>
+        <input type="password" asp-for="@Model.Sfp.Password" />
     </div>
     <button type="submit">!Login!</button>
 </form>
+
+@if (Model.Message)
+{
+    <h1 style="text-align:center; margin-top:100px; color:red;">Nutzername oder Passwort falsch! Bitte versuchen Sie es erneut</h1>
+}
