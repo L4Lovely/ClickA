@@ -14,13 +14,24 @@ namespace ClickA.Controllers
     {
         public IActionResult Index()
         {
-            return View();
+            return View(new IndexView());
         }
 
         [HttpPost]
-        public IActionResult MainView(SQLConnector s)
-        {              
-            return View();
+        public IActionResult MainView(IndexView iv)
+        {
+            SQLConnector.ReadTable();
+            if (SQLConnector.SignIn(iv.Sfp.Username, iv.Sfp.Password))
+            {
+                SQLConnector.SFP = iv.Sfp;
+                return View();
+
+            }
+            else
+            {
+                iv.Message = true;
+                return View("Index",iv);
+            }
         }
     }
 }
