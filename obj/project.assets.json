@@ -744,24 +744,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\lupol\\.nuget\\packages\\": {},
-    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
+    "C:\\Users\\Stefan\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\lupol\\source\\repos\\ClickA\\ClickA.csproj",
+      "projectUniqueName": "C:\\Users\\Stefan\\Documents\\GitHub\\ClickA\\ClickA.csproj",
       "projectName": "ClickA",
-      "projectPath": "C:\\Users\\lupol\\source\\repos\\ClickA\\ClickA.csproj",
-      "packagesPath": "C:\\Users\\lupol\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\lupol\\source\\repos\\ClickA\\obj\\",
+      "projectPath": "C:\\Users\\Stefan\\Documents\\GitHub\\ClickA\\ClickA.csproj",
+      "packagesPath": "C:\\Users\\Stefan\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\Stefan\\Documents\\GitHub\\ClickA\\obj\\",
       "projectStyle": "PackageReference",
-      "fallbackFolders": [
-        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
-      ],
       "configFilePaths": [
-        "C:\\Users\\lupol\\AppData\\Roaming\\NuGet\\NuGet.Config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+        "C:\\Users\\Stefan\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -815,7 +810,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.100\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.102\\RuntimeIdentifierGraph.json"
       }
     }
   }
