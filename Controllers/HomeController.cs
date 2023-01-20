@@ -17,21 +17,26 @@ namespace ClickA.Controllers
             return View(new IndexView());
         }
 
-        [HttpPost]
-        public IActionResult MainView(IndexView iv)
+        public IActionResult MainView()
         {
-            SQLConnector.ReadTable();
-            if (SQLConnector.SignIn(iv.Sfp.Username, iv.Sfp.Password))
-            {
-                SQLConnector.SFP = iv.Sfp;
-                return View();
-
-            }
-            else
-            {
-                iv.Message = true;
-                return View("Index",iv);
-            }
+            return View();
         }
+
+
+        //[HttpPost]
+        //public IActionResult MainView(IndexView iv)
+        //{
+        //    if (SQLConnector.SignIn(iv.Sfp.Username, iv.Sfp.Password))
+        //    {
+        //        SQLConnector.SFP = iv.Sfp;
+        //        return View();
+
+        //    }
+        //    else
+        //    {
+        //        iv.Message = true;
+        //        return View("Index",iv);
+        //    }
+        //}
     }
 }

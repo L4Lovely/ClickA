@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.Design;
+﻿using System;
+using System.ComponentModel.Design;
 using System.Data;
 using System.Data.SqlClient;
 using Npgsql;
@@ -7,7 +8,7 @@ namespace ClickA.Models
 {
     public static class SQLConnector
     {
-        //Tabellen: nutzer, stats
+        //Tabellen: nutzer
 
         //SignIn muss bearbeitet werden
         public static SaveFileParser SFP { get; set; }
@@ -17,14 +18,22 @@ namespace ClickA.Models
 
         static NpgsqlConnection con = new NpgsqlConnection(conString);
         static DataTable dt = new DataTable();
-        public static DataTable ReadTable()
+
+        public static DataTable Read()
         {
-            NpgsqlCommand com = new NpgsqlCommand("select * from nutzer;", con);
-            using (NpgsqlDataAdapter ada = new NpgsqlDataAdapter(com))
+            DataTable data= new DataTable();
+            using (con)
             {
-                ada.Fill(dt);
+                string conString = $"select * from nutzer;";
+                using (NpgsqlCommand command = new NpgsqlCommand(conString, con))
+                {
+                    using (NpgsqlDataAdapter adapter = new NpgsqlDataAdapter(command))
+                    {
+                        adapter.Fill(data);
+                    }
+                }
             }
-            return dt;
+            return data;
         }
 
         public static void NewSignUp(string Username, string password)
@@ -43,7 +52,6 @@ namespace ClickA.Models
         }
         public static bool SignIn(string username, string password)
         {
-            DataTable d = new DataTable();
             using (con)
             {
                 string conString = $"select * from nutzer where username='{username}' and password='{password}'";
@@ -51,27 +59,31 @@ namespace ClickA.Models
                 {
                     using (NpgsqlDataAdapter adapter = new NpgsqlDataAdapter(command))
                     {
-                        adapter.Fill(d);
+                        adapter.Fill(dt);
                     }
                 }
             }
 
             if (dt.Rows.Count == 1)
             {
-                SFP.Username = d.Rows[0]["username"].ToString();
-                SFP.Password = d.Rows[0]["password"].ToString();
-
+                SFP.ID = Convert.ToInt32(dt.Rows[0]["id"]);
+                SFP.Username = dt.Rows[0]["username"].ToString();
+                SFP.Password = dt.Rows[0]["password"].ToString();
+                SFP.Energy = Convert.ToInt32(dt.Rows[0]["energy"]);
+                SFP.Transformer = Convert.ToInt32(dt.Rows[0]["transformer"]);
+                SFP.Clickpower = Convert.ToInt32(dt.Rows[0]["clickpower"]);
+                SFP.Clickbot = Convert.ToInt32(dt.Rows[0]["clickbot"]);
+                SFP.Clickbotfabrik = Convert.ToInt32(dt.Rows[0]["clickbotfabrik"]);
+                SFP.Generator = Convert.ToInt32(dt.Rows[0]["generator"]);
             }
-
-
-            return d.Rows.Count == 1 ? true : false;
+            return dt.Rows.Count == 1 ? true : false;
         }
 
         public static void UpdateStats(int energy, int clickpower, int generator, int transformer, int clickbotfabrik, int clickbot)
         {
             using (con)
             {
-                string comString = $"update table stats set energy={energy},clickpower={clickpower},generator={generator}, transformer={transformer},clickbotfabrik={clickbotfabrik}, clickbot={clickbot} where id=(select id from nutzer where username ={SFP.Username} and password = {SFP.Password}); ";
+                string comString = $"update table nutzer set energy={energy},clickpower={clickpower},generator={generator}, transformer={transformer},clickbotfabrik={clickbotfabrik}, clickbot={clickbot} where id=(select id from nutzer where id = {SFP.ID};";
                 using (NpgsqlCommand command = new NpgsqlCommand(comString, con))
                 {
                     con.Open();
