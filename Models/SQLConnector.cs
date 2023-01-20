@@ -1,47 +1,79 @@
 ﻿using System.ComponentModel.Design;
 using System.Data;
 using System.Data.SqlClient;
+using Npgsql;
 
 namespace ClickA.Models
 {
-    public  class SQLConnector{
-        public  string Username { get; set; }
-        public  string Password { get; set; }
+    public class SQLConnector
+    {
+        //Tabellen: nutzer, stats
 
 
-        private static string connectionString = @"Data Source=(localdb)\ProjectModels;Initial Catalog=ClickA_DB;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
-        SqlConnection conobj = new SqlConnection(connectionString);
-        SqlCommand sqlCommand;
+        public string Username = string.Empty;
+        public string Password = string.Empty;
 
-        public  DataTable LogInRequest() {
-                DataTable dt = new DataTable();
-                sqlCommand = new SqlCommand("select * from " + "users", conobj);
-                using (SqlDataAdapter adaobj = new SqlDataAdapter(sqlCommand)){
-                    conobj.Open();
-                    adaobj.Fill(dt);
-                    conobj.Close();
-                }
+
+        static string conString = "Host=172.21.1.92;Port=5432;User ID=testuser;Password=test;Database=clicka_db;";
+
+        NpgsqlConnection con = new NpgsqlConnection(conString);
+        DataTable dt = new DataTable();
+        public DataTable ReadTable()
+        {
+            NpgsqlCommand com = new NpgsqlCommand("select * from nutzer;", con);
+            using (NpgsqlDataAdapter ada = new NpgsqlDataAdapter(com))
+            {
+                ada.Fill(dt);
+            }
             return dt;
         }
 
-        public bool RegisterRequest(string checkforusername){
-            sqlCommand = new SqlCommand($"SELECT * FROM USERS WHERE username = '{checkforusername}'", conobj);
-            if (sqlCommand.ExecuteReader().HasRows)
+        public void NewSignUp(string Username, string password)
+        {
+            using (con)
             {
-                // return registration has failed view -- username already exists
-                return false;
+                string comString = $"insert into nutzer(id,username,password) values ({dt.Rows.Count},{Username},{password});";
+
+                using (NpgsqlCommand command = new NpgsqlCommand(comString, con))
+                {
+                    con.Open();
+                    command.ExecuteNonQuery();
+                    con.Close();
+                }
             }
-            return true;
+        }
+        public bool SignIn(string username, string password)
+        {
+            DataTable d = new DataTable();
+            using (con)
+            {
+                string conString = $"select * from nutzer where username={username} and password={password}";
+                using (NpgsqlCommand command = new NpgsqlCommand(conString, con))
+                {
+                    using (NpgsqlDataAdapter adapter = new NpgsqlDataAdapter(command))
+                    {
+                        adapter.Fill(d);
+                    }
+                }
+            }
+            Username = d.Rows[0]["username"].ToString();
+            Password = d.Rows[0]["password"].ToString();
+
+            return d.Rows.Count == 1 ? true : false;
         }
 
-        public void RegisterUser(string checkforusername, string userpassword){
-            conobj.Open();
-            if (RegisterRequest(checkforusername))
+        public void UpdateStats(int energy, int clickpower, int generator, int transformer, int clickbotfabrik, int clickbot)
+        {
+            using (con)
             {
-                sqlCommand = new SqlCommand($"INSERT INTO USERS values(1, '{checkforusername}', '{userpassword}')");
+                string comString = $"update table stats set energy={energy},clickpower={clickpower},generator={generator}, transformer={transformer},clickbotfabrik={clickbotfabrik}, clickbot={clickbot} where id=(select id from nutzer where username ={Username} and password = {Password}); ";
+                using (NpgsqlCommand command = new NpgsqlCommand(comString, con))
+                {
+                    con.Open();
+                    command.ExecuteNonQuery();
+                    con.Close();
+                }
             }
-            else { /*return registration has failed view -- username already exists */}
-            conobj.Close();
         }
     }
 }

@@ -1,0 +1,114 @@
+﻿.EnergyButton {
+    position: relative;
+    border-radius: 35px;
+    background-color: chartreuse;
+    color: yellow;
+    font-weight: bold;
+    padding: 10px;
+    padding-bottom: -20px;
+    border-color: black;
+    outline: none;
+    width: 50px;
+    margin-left: 153px;
+    border-width: 3px;
+    text-shadow: 0 0 3px #FF0000, 0 0 5px #0000FF;
+}
+
+    .EnergyButton:focus {
+        outline: 0 !important;
+    }
+
+.GeneratorTab {
+    margin: auto;
+    position: absolute;
+    text-align: center;
+    bottom: 80px;
+    width: 50%;
+}
+
+.GameStatusHeader {
+    margin: auto;
+    position: absolute;
+    text-align: center;
+    top: 60px;
+    width: 50%;
+}
+
+.CurrencyInfo {
+    position: relative;
+    border-radius: 0px 0px 15px 15px;
+    background-color: chartreuse;
+    color: yellow;
+    font-weight: bold;
+    font-size: inherit;
+    padding: 10px;
+    padding-bottom: 11px;
+    border-color: black;
+    outline: none;
+    width: 300px;
+    margin-left: 153px;
+    border-width: 3px;
+    border-style: outset;
+    text-shadow: 0 0 3px #000, 0 0 5px #000;
+    letter-spacing: 3px;
+}
+
+.ComponentPanel {
+    padding-top: 40px;
+    margin-top: 6%;
+    top: -20px;
+    background-color: chartreuse;
+    width: 200px;
+    height: 700px;
+    top: -5px;
+    z-index: -1;
+    pointer-events: none;
+    border-style: outset;
+    border-width: 3px;
+    border-radius: 15px;
+}
+
+.UpgradeButton {
+    margin: 10px;
+    margin-top: 13px;
+    margin-left: 12px;
+    border-radius: 5px;
+    font-weight: bold;
+    font-size: small;
+    padding: 5px;
+    border-color: black;
+    border-width: 3px;
+    border-style: outset;
+    text-shadow: 0 0 3px #000, 0 0 5px #000;
+    letter-spacing: 3px;
+    z-index: 2;
+}
+
+.ClickPower {
+    pointer-events: auto;
+}
+
+.upgradeparentbox {
+    display: grid;
+    grid-template-columns: .5fr 1fr;
+    grid-template-rows: repeat(2, .5fr);
+    grid-column-gap: 0px;
+    grid-row-gap: 0px;
+}
+
+.upgradebuttonbox {
+    background-color: blue;
+    grid-area: 1 / 1 / 3 / 2;
+}
+
+.upgradelabelbox {
+    padding-top: 0px;
+    background-color: bisque;
+    grid-area: 1 / 2 / 2 / 3;
+}
+
+.upgradecostinfobox {
+    padding-top: 0px;
+    background-color: blueviolet;
+    grid-area: 2 / 2 / 3 / 3;
+}

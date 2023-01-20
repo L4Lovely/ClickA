@@ -3,9 +3,83 @@
 }
 @using System.Data.SqlClient;
 @using System.Data;
-<div>
-    @foreach(DataRow item in Model.Rows){
-        <p>@item["username"]</p>        
-        <p>@item["userpassword"]</p>
-    }
+<link rel="stylesheet" href="~/css/mainView.css" />
+
+<div class="GameStatusHeader">
+    <label class="CurrencyInfo" id="CurrencyLabel">
+        ENERGY
+    </label>
 </div>
+
+<div class="GeneratorTab">
+    <button id="EnergyButton" class="EnergyButton">⚡</button>
+</div>
+
+<div class="ComponentPanel">
+    <div class="upgradeparentbox">
+        <div class="upgradebuttonbox">
+            <button id="ClickPower_Upgrade" class="UpgradeButton ClickPower">⚡</button>
+
+        </div>
+        <div class="upgradelabelbox">
+            <label style="">INFO</label>
+
+        </div>
+        <div class="upgradecostinfobox">
+            <label id="" style="">COST</label>
+
+        </div>
+    </div>
+
+    <div class="upgradeparentbox">
+        <div class="upgradebuttonbox">
+            <button id="ClickPower_Upgrade" class="UpgradeButton ClickPower">⚡</button>
+
+        </div>
+        <div class="upgradelabelbox">
+            <label style="">INFO</label>
+
+        </div>
+        <div class="upgradecostinfobox">
+            <label id="" style="">COST</label>
+
+        </div>
+    </div>
+</div>
+
+<script>
+
+    let ENERGY = 0;
+    let ENERGY_INCVAL = 1;
+    let EnergyButton = document.getElementById("EnergyButton");
+    let CurrencyLabel = document.getElementById("CurrencyLabel");
+
+    let ClickPowerButton = document.getElementById("ClickPower_Upgrade");
+    let ClickPowerCost = 20;
+
+    EnergyButton.addEventListener('click', () => {
+        ENERGY += ENERGY_INCVAL;
+        CurrencyLabel.textContent = ENERGY.toString() + "E";
+    })
+
+    ClickPowerButton.addEventListener('click', () => {
+        if (ENERGY >= ClickPowerCost) {
+            ENERGY_INCVAL += 1;             // increase click power by 1
+            ENERGY -= ClickPowerCost;       // deduct the cost from currency
+            ClickPowerCost *= 2;            // increase upgrade cost
+            CurrencyLabel.textContent = ENERGY.toString() + "E"; // update currency info label
+        }
+    })
+
+
+    setTimeout(cashout_timer, 300);
+    function cashout_timer() {
+        console.log('TICK');
+        setTimeout(cashout_timer2, 300);
+    }
+    function cashout_timer2() {
+        console.log('TICK2');
+        setTimeout(cashout_timer, 300);
+    }
+
+</script>

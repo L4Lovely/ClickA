@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Reflection.Emit;
 using System.Threading.Tasks;
 
 namespace ClickA.Controllers
@@ -19,7 +20,7 @@ namespace ClickA.Controllers
         [HttpPost]
         public IActionResult MainView(SQLConnector s)
         {              
-            return View(s.LogInRequest());
+            return View();
         }
     }
 }
