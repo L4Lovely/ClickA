@@ -1,20 +1,24 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Stefan\\Documents\\GitHub\\ClickA\\ClickA.csproj": {}
+    "C:\\Users\\lupol\\Documents\\GitHub\\ClickA\\ClickA.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Stefan\\Documents\\GitHub\\ClickA\\ClickA.csproj": {
+    "C:\\Users\\lupol\\Documents\\GitHub\\ClickA\\ClickA.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Stefan\\Documents\\GitHub\\ClickA\\ClickA.csproj",
+        "projectUniqueName": "C:\\Users\\lupol\\Documents\\GitHub\\ClickA\\ClickA.csproj",
         "projectName": "ClickA",
-        "projectPath": "C:\\Users\\Stefan\\Documents\\GitHub\\ClickA\\ClickA.csproj",
-        "packagesPath": "C:\\Users\\Stefan\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Stefan\\Documents\\GitHub\\ClickA\\obj\\",
+        "projectPath": "C:\\Users\\lupol\\Documents\\GitHub\\ClickA\\ClickA.csproj",
+        "packagesPath": "C:\\Users\\lupol\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\lupol\\Documents\\GitHub\\ClickA\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
         "configFilePaths": [
-          "C:\\Users\\Stefan\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\lupol\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
