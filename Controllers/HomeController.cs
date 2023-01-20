@@ -17,25 +17,42 @@ namespace ClickA.Controllers
             return View(new IndexView());
         }
 
-        public IActionResult MainView()
+        //public IActionResult MainView()
+        //{
+        //    return View();
+        //}
+
+
+        [HttpPost]
+        public IActionResult MainView(IndexView iv)
         {
-            return View();
+            if (SQLConnector.SignIn(iv.Sfp.Username, iv.Sfp.Password))
+            {
+                SQLConnector.SFP = iv.Sfp;
+                return View();
+            }
+            else
+            {
+                iv.Message = true;
+                return View("Index", iv);
+            }
         }
 
+        //Nachfolgend muss bearbeitet werden(Aus der anderen Connectorklasse übernehmen)
 
         //[HttpPost]
         //public IActionResult MainView(IndexView iv)
         //{
-        //    if (SQLConnector.SignIn(iv.Sfp.Username, iv.Sfp.Password))
+        //    if (NpgsqlConnector.SignIn(iv.Sfp.Username, iv.Sfp.Password))
         //    {
-        //        SQLConnector.SFP = iv.Sfp;
+        //        NpgsqlConnector.SFP = iv.Sfp;
         //        return View();
 
         //    }
         //    else
         //    {
         //        iv.Message = true;
-        //        return View("Index",iv);
+        //        return View("Index", iv);
         //    }
         //}
     }
