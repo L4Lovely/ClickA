@@ -2,6 +2,7 @@
 using System.ComponentModel.Design;
 using System.Data;
 using System.Data.SqlClient;
+using System.Diagnostics;
 using System.Diagnostics.Metrics;
 
 namespace ClickA.Models
@@ -10,19 +11,40 @@ namespace ClickA.Models
     {
         //Tabellen: nutzer
 
-        public static SaveFileParser SFP { get; set; }
+        public static SaveFileParser SFP { get; set; } = new SaveFileParser();
 
 
-        static string conString = @"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog = master; Integrated Security = True; Connect Timeout = 30; Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False;";
+        static string conString = @"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog = ClickA_DB; Integrated Security = True; Connect Timeout = 30; Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False;";
 
-        static SqlConnection con = new SqlConnection(conString);
 
-       static DataTable dt = new DataTable();
-        public static void NewSignUp(string Username, string password)
+        static DataTable dt = new DataTable();
+
+
+
+        public static void FirstRead()
         {
+            SqlConnection con = new SqlConnection(conString);
             using (con)
             {
-                string comString = $"insert into nutzer(id,username,password) values ({dt.Rows.Count},{Username},{password});";
+                string conString = "select * from nutzer";
+                using (SqlCommand command = new SqlCommand(conString, con))
+                {
+                    using (SqlDataAdapter adapter = new SqlDataAdapter(command))
+                    {
+                        adapter.Fill(dt);
+                        con.Close();
+                    }
+                }
+            }
+        }
+
+
+        public static void NewSignUp(string username, string password)
+        {
+            SqlConnection con = new SqlConnection(conString);
+            using (con)
+            {
+                string comString = $"insert into nutzer values ({dt.Rows.Count},'{username}','{password}',0,0,0,0,0,0)";
 
                 using (SqlCommand command = new SqlCommand(comString, con))
                 {
@@ -31,25 +53,15 @@ namespace ClickA.Models
                     con.Close();
                 }
             }
+            FirstRead();
         }
+
+        //SignIn ist fertig!!!
         public static bool SignIn(string username, string password)
         {
-            
+            DataRow[] d = null;
 
-            using (con)
-            {
-                string conString = $"select * from nutzer;";
-                using (SqlCommand command = new SqlCommand(conString, con))
-                {
-                    using (SqlDataAdapter adapter = new SqlDataAdapter(command))
-                    {
-                        adapter.Fill(dt);
-                    }
-                }
-            }
-
-            DataRow[] d = dt.Select($"username = {username} and password = {password}");
-
+            d = dt.Select($"username = '{username}' and password = '{password}'");
 
             if (d.Length == 1)
             {
@@ -68,6 +80,7 @@ namespace ClickA.Models
 
         public static void UpdateStats(int energy, int clickpower, int generator, int transformer, int clickbotfabrik, int clickbot)
         {
+            SqlConnection con = new SqlConnection(conString);
             using (con)
             {
                 string comString = $"update table nutzer set energy={energy},clickpower={clickpower},generator={generator}, transformer={transformer},clickbotfabrik={clickbotfabrik}, clickbot={clickbot} where id=(select id from nutzer where id = {SFP.ID};";

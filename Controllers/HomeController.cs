@@ -22,6 +22,13 @@ namespace ClickA.Controllers
         //    return View();
         //}
 
+        [HttpPost]
+        public IActionResult Index(SignUp su)
+        {
+            SQLConnector.NewSignUp(su.Username, su.Password);
+            return View(new IndexView());
+        }
+
 
         [HttpPost]
         public IActionResult MainView(IndexView iv)
@@ -55,5 +62,11 @@ namespace ClickA.Controllers
         //        return View("Index", iv);
         //    }
         //}
+
+
+        public IActionResult SignUp()
+        {
+            return View();
+        }
     }
 }

@@ -1,3 +1,4 @@
+using ClickA.Models;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
@@ -13,6 +14,7 @@ namespace ClickA
     {
         public static void Main(string[] args)
         {
+            SQLConnector.FirstRead();
             CreateHostBuilder(args).Build().Run();
         }
 

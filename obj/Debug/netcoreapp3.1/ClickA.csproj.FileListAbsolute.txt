@@ -154,3 +154,4 @@ C:\Users\Stefan\Documents\GitHub\ClickA\obj\Debug\netcoreapp3.1\ClickA.RazorTarg
 C:\Users\Stefan\Documents\GitHub\ClickA\obj\Debug\netcoreapp3.1\ClickA.Views.pdb
 C:\Users\Stefan\Documents\GitHub\ClickA\obj\Debug\netcoreapp3.1\ClickA.csproj.CopyComplete
 C:\Users\Stefan\Documents\GitHub\ClickA\obj\Debug\netcoreapp3.1\ClickA.genruntimeconfig.cache
+C:\Users\Stefan\Documents\GitHub\ClickA\obj\Debug\netcoreapp3.1\Razor\Views\Home\SignUp.cshtml.g.cs
