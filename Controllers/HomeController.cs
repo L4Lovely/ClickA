@@ -36,7 +36,7 @@ namespace ClickA.Controllers
             if (SQLConnector.SignIn(iv.Sfp.Username, iv.Sfp.Password))
             {
                 SQLConnector.SFP = iv.Sfp;
-                return View();
+                return View(SQLConnector.SFP);
             }
             else
             {
