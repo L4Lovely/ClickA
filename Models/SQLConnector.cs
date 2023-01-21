@@ -78,7 +78,7 @@ namespace ClickA.Models
             return d.Length == 1 ? true : false;
         }
 
-        public static void UpdateStats(int energy, int clickpower, int generator, int transformer, int clickbotfabrik, int clickbot)
+        public static void LogOut(int energy, int clickpower, int generator, int transformer, int clickbotfabrik, int clickbot)
         {
             SqlConnection con = new SqlConnection(conString);
             using (con)
