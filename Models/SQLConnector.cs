@@ -10,7 +10,6 @@ namespace ClickA.Models
     {
         //Tabellen: nutzer
 
-        //SignIn muss bearbeitet werden
         public static SaveFileParser SFP { get; set; }
 
 
