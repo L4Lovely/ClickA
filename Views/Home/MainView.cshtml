@@ -7,7 +7,7 @@
 
 <div class="GameStatusHeader">
     <label class="CurrencyInfo" id="CurrencyLabel">
-        ENERGY
+        0E
     </label>
 </div>
 
@@ -22,26 +22,26 @@
 
         </div>
         <div class="upgradelabelbox">
-            <label style="">Click Power</label>
+            <label id="ClickPowerLabel" style="">Click Power</label>
 
         </div>
         <div class="upgradecostinfobox">
-            <label id="" style="">COST</label>
+            <label id="ClickPowerCostLabel" style="">20E</label>
 
         </div>
     </div>
-
+     
     <div class="upgradeparentbox">
         <div class="upgradebuttonbox">
-            <button id="ClickPower_Upgrade" class="UpgradeButton ClickPower">⚡</button>
+            <button id="Generator_Upgrade" class="UpgradeButton Generator">G</button>
 
         </div>
         <div class="upgradelabelbox">
-            <label style="">INFO</label>
+            <label id="GeneratorLabel" style="">Generator</label>
 
         </div>
         <div class="upgradecostinfobox">
-            <label id="" style="">COST</label>
+            <label id="GeneratorCostLabel" style="">180E</label>
 
         </div>
     </div>
@@ -50,12 +50,21 @@
 <script>
 
     let ENERGY = 0;
+    let PASSIVE_ENERGY = 0;
     let ENERGY_INCVAL = 1;
     let EnergyButton = document.getElementById("EnergyButton");
     let CurrencyLabel = document.getElementById("CurrencyLabel");
 
     let ClickPowerButton = document.getElementById("ClickPower_Upgrade");
+    let ClickPowerCostLabel = document.getElementById("ClickPowerCostLabel")
+    let ClickPowerLevel = 0;
     let ClickPowerCost = 20;
+
+    let GeneratorUpgradeButton = document.getElementById("Generator_Upgrade")
+    let GeneratorCostLabel = document.getElementById("GeneratorCostLabel")
+    let GeneratorLevel = 0;
+    let GeneratorUpgradeCost = 180;
+    let GeneratorPower = 0;
 
     EnergyButton.addEventListener('click', () => {
         ENERGY += ENERGY_INCVAL;
@@ -64,22 +73,45 @@
 
     ClickPowerButton.addEventListener('click', () => {
         if (ENERGY >= ClickPowerCost) {
+            ClickPowerLevel += 1;
             ENERGY_INCVAL += 1;             // increase click power by 1
             ENERGY -= ClickPowerCost;       // deduct the cost from currency
             ClickPowerCost *= 2;            // increase upgrade cost
-            CurrencyLabel.textContent = ENERGY.toString() + "E"; // update currency info label
+            RefreshCurrency();
+            ClickPowerCostLabel.textContent = ClickPowerCost.toString() + "E";
         }
     })
 
+    GeneratorUpgradeButton.addEventListener('click', () => {
+        if (ENERGY >=  GeneratorUpgradeCost){
+            GeneratorLevel += 1;
+            ENERGY -= GeneratorUpgradeCost;
+            GeneratorPower += 1;
+            PASSIVE_ENERGY += 1;
+            GeneratorUpgradeCost *= 2;
+            RefreshCurrency();
+            GeneratorCostLabel.textContent = GeneratorUpgradeCost.toString() + "E";
+        }
+    })
 
-    setTimeout(cashout_timer, 300);
+    function RefreshCurrency(){
+        CurrencyLabel.textContent = ENERGY.toString() + "E";
+    }
+    function RefreshLabels(){
+
+    }
+
+
+    setTimeout(cashout_timer, 1000);
     function cashout_timer() {
-        console.log('TICK');
-        setTimeout(cashout_timer2, 300);
+        ENERGY += PASSIVE_ENERGY;
+        setTimeout(cashout_timer2, 500);
+        RefreshCurrency();
+        console.log('TICK')
     }
     function cashout_timer2() {
         console.log('TICK2');
-        setTimeout(cashout_timer, 300);
+        setTimeout(cashout_timer, 500);
     }
 
 </script>
