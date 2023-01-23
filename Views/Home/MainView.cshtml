@@ -1,6 +1,8 @@
-﻿@model SaveFileParser
+﻿@model DataTable
 @{
 }
+@using System.Data.SqlClient;
+@using System.Data;
 <link rel="stylesheet" href="~/css/mainView.css" />
 
 <div class="GameStatusHeader">
@@ -28,7 +30,7 @@
 
         </div>
     </div>
-     
+
     <div class="upgradeparentbox">
         <div class="upgradebuttonbox">
             <button id="Generator_Upgrade" class="UpgradeButton Generator">G</button>
@@ -45,13 +47,18 @@
     </div>
 </div>
 
-<script>
+<button id="SaveButton" style="position:absolute; bottom: 70px; left 150px;">SAVE</button>
 
+<input id="parseField_ENERGY" type="hidden" runat="server" /> 
+<input id="parseField_ROBOCRYSTALS" type="hidden" runat="server" /> 
+
+<script>
     let ENERGY = 0;
     let PASSIVE_ENERGY = 0;
     let ENERGY_INCVAL = 1;
     let EnergyButton = document.getElementById("EnergyButton");
     let CurrencyLabel = document.getElementById("CurrencyLabel");
+    let SaveButton = document.getElementById("SaveButton");
 
     let ClickPowerButton = document.getElementById("ClickPower_Upgrade");
     let ClickPowerCostLabel = document.getElementById("ClickPowerCostLabel")
@@ -67,6 +74,7 @@
     EnergyButton.addEventListener('click', () => {
         ENERGY += ENERGY_INCVAL;
         CurrencyLabel.textContent = ENERGY.toString() + "E";
+
     })
 
     ClickPowerButton.addEventListener('click', () => {
@@ -81,7 +89,7 @@
     })
 
     GeneratorUpgradeButton.addEventListener('click', () => {
-        if (ENERGY >=  GeneratorUpgradeCost){
+        if (ENERGY >= GeneratorUpgradeCost) {
             GeneratorLevel += 1;
             ENERGY -= GeneratorUpgradeCost;
             GeneratorPower += 1;
@@ -92,13 +100,11 @@
         }
     })
 
-    function RefreshCurrency(){
+    function RefreshCurrency() {
         CurrencyLabel.textContent = ENERGY.toString() + "E";
     }
-    function RefreshLabels(){
-
+    function RefreshLabels() {
     }
-
 
     setTimeout(cashout_timer, 1000);
     function cashout_timer() {
@@ -112,4 +118,8 @@
         setTimeout(cashout_timer, 500);
     }
 
+    SaveButton.addEventListener('click', () => {
+        var parseField_ENERGY = '<%= parseField_ENERGY.ClientID %>';
+        document.getElementById(parseField_ENERGY).value = ENERGY;
+    })
 </script>
