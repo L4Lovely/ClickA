@@ -205,3 +205,4 @@ C:\Users\Meins\Documents\GitHub\ClickA\obj\Debug\netcoreapp3.1\ClickA.csproj.Cop
 C:\Users\Meins\Documents\GitHub\ClickA\obj\Debug\netcoreapp3.1\ClickA.dll
 C:\Users\Meins\Documents\GitHub\ClickA\obj\Debug\netcoreapp3.1\ClickA.pdb
 C:\Users\Meins\Documents\GitHub\ClickA\obj\Debug\netcoreapp3.1\ClickA.genruntimeconfig.cache
+C:\Users\Meins\Documents\GitHub\ClickA\obj\Debug\netcoreapp3.1\Razor\Views\Home\Ausloggen.cshtml.g.cs

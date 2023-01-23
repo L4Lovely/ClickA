@@ -5,11 +5,11 @@
 <form asp-action="MainView" method="post">
     <div>
         <label asp-for="@Model.Sfp.Username">Username: </label>
-        <input asp-for="@Model.Sfp.Username" />
+        <input asp-for="@Model.Sfp.Username" value="Testuser" />
     </div>
     <div>
         <label asp-for="@Model.Sfp.Password">Password: </label>
-        <input type="password" asp-for="@Model.Sfp.Password" />
+        <input type="password" asp-for="@Model.Sfp.Password" value="Testpasswort" />
     </div>
     <button type="submit">!Login!</button>
     <button type="button" onclick="location.href='../Home/SignUp'">!SignUp!</button>

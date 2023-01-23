@@ -1,4 +1,4 @@
-﻿@model DataTable
+﻿@model SaveFileParser
 @{
 }
 @using System.Data.SqlClient;
@@ -47,12 +47,9 @@
     </div>
 </div>
 
-<button id="SaveButton" style="position:absolute; bottom: 70px; left 150px;">SAVE</button>
 
-<input id="parseField_ENERGY" type="hidden" runat="server" /> 
-<input id="parseField_ROBOCRYSTALS" type="hidden" runat="server" /> 
 
-<script>
+<script type="text/javascript">
     let ENERGY = 0;
     let PASSIVE_ENERGY = 0;
     let ENERGY_INCVAL = 1;
@@ -117,9 +114,4 @@
         console.log('TICK2');
         setTimeout(cashout_timer, 500);
     }
-
-    SaveButton.addEventListener('click', () => {
-        var parseField_ENERGY = '<%= parseField_ENERGY.ClientID %>';
-        document.getElementById(parseField_ENERGY).value = ENERGY;
-    })
 </script>

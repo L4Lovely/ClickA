@@ -57,6 +57,12 @@ namespace ClickA.Controllers
             return View(new IndexView());
         }
 
+        [HttpPost]
+        public IActionResult Ausloggen(SaveFileParser sfp)
+        {
+            Debug.Write(sfp.Energy);
+            return View();
+        }
 
         [HttpPost]
         public IActionResult MainView(IndexView iv)
@@ -65,7 +71,6 @@ namespace ClickA.Controllers
             {
                 NpgsqlConnector.SFP = iv.Sfp;
                 return View(SQLConnector.SFP);
-
             }
             else
             {
@@ -74,10 +79,10 @@ namespace ClickA.Controllers
             }
         }
 
-
         public IActionResult SignUp()
         {
             return View();
         }
+
     }
 }
