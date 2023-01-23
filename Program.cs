@@ -14,7 +14,8 @@ namespace ClickA
     {
         public static void Main(string[] args)
         {
-            SQLConnector.FirstRead();
+            //SQLConnector.FirstRead();
+            NpgsqlConnector.FirstRead();
             CreateHostBuilder(args).Build().Run();
         }
 
